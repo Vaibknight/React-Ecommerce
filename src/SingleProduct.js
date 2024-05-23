@@ -11,6 +11,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { TbReplace } from "react-icons/tb";
 import { MdSecurity } from "react-icons/md";
 import Star from "./component/Star";
+import AddToCart from "./component/AddToCart";
 
 const API = "https://api.pujakaitem.com/api/products";
 
@@ -65,7 +66,10 @@ const SingleProduct = () => {
                 Deal of the Day: <FormatPrice price={price} />
               </p>
               <p>{description}</p>
-              <div className="product-data-warranty">
+              <div
+                className="product-data-warranty"
+                style={{ margin: "20px 0px" }}
+              >
                 <div className="product-warranty-data">
                   <TbTruckDelivery className="warranty-icon" />
                   <p>Free Delivery</p>
@@ -86,7 +90,7 @@ const SingleProduct = () => {
                   <p>2 Year Warranty</p>
                 </div>
               </div>
-              <div className="product-data-info">
+              <div className="product-data-info" style={{ margin: "20px 0px" }}>
                 <p>
                   Available:{" "}
                   <span>{stock > 0 ? "In Stock" : "Not Available"}</span>
@@ -98,6 +102,8 @@ const SingleProduct = () => {
                   Brand: <span>{company}</span>
                 </p>
               </div>
+              <hr style={{ margin: "20px 0px" }} />
+              {stock > 0 && <AddToCart product={singleProduct} />}
             </div>
           </div>
         </div>
