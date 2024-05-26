@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import FilterSection from "./component/FilterSection";
 import Sort from "./component/Sort";
 import ProductList from "./component/ProductList";
 import { useFilterContext } from "./context/filterContext";
+import { Button } from "./styles/Button";
 
 const Products = () => {
-  const { filter_products } = useFilterContext();
-  console.log(filter_products);
+  const { filter_products, grid_view } = useFilterContext();
 
   return (
     <Wrapper>
