@@ -9,37 +9,22 @@ import { NavLink } from "react-router-dom";
 const AddToCart = ({ product }) => {
   const { id, colors, stock } = product;
 
-  const [color, setColor] = useState(colors[0]);
   const [amount, setAmount] = useState(1);
 
   const setDecrease = () => {
-    amount > 1 ? setAmount(amount - 1) : setAmount(1);
+    // amount > 1 ? setAmount(amount - 1) : setAmount(1);
+
+    amount > 0 ? setAmount(amount - 1) : setAmount(0);
   };
 
   const setIncrease = () => {
-    amount < stock ? setAmount(amount + 1) : setAmount(stock);
+    // amount < stock ? setAmount(amount + 1) : setAmount(0);
+
+    setAmount(amount + 1);
   };
 
   return (
     <Wrapper>
-      <div className="colors">
-        <p>
-          Colors:
-          {colors.map((cur, index) => {
-            return (
-              <button
-                className={color === cur ? "btnStyle active" : "btnStyle"}
-                style={{ backgroundColor: cur }}
-                key={index}
-                onClick={() => setColor(cur)}
-              >
-                {color === cur ? <FaCheck className="checkStyle" /> : null}
-              </button>
-            );
-          })}
-        </p>
-      </div>
-
       <CartAmountToggle
         amount={amount}
         setDecrease={setDecrease}

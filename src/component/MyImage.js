@@ -5,13 +5,15 @@ import styled from "styled-components";
 const MyImage = ({ image = [{ url: "" }] }) => {
   const [arrID, setArrID] = useState(image[0].url);
 
+  console.log(image);
+
   const getID = (url) => {
     setArrID(url);
   };
 
   return (
     <Wrapper>
-      <div className="grid grid-four-column">
+      {/* <div className="grid grid-four-column">
         {image.map((ele, index) => {
           return (
             <figure>
@@ -25,10 +27,10 @@ const MyImage = ({ image = [{ url: "" }] }) => {
             </figure>
           );
         })}
-      </div>
+      </div> */}
 
       <div className="main-screen">
-        <img src={arrID} alt={image[0].filename} />
+        <img src={image} alt={image[0].filename} />
       </div>
     </Wrapper>
   );

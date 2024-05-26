@@ -1,25 +1,16 @@
-import { useProductContext } from "../context/ProductContext";
+import React from "react";
 import styled from "styled-components";
 import Product from "./Product";
 
-const FeaturedProduct = () => {
-  const { isLoading, featuredProducts } = useProductContext();
+const GridView = ({ products }) => {
+  console.log(products);
 
-  console.log(featuredProducts);
-
-  if (isLoading) {
-    return <div>......Loading</div>;
-  }
   return (
     <Wrapper className="section">
-      <div className="container">
-        <div className="intro-data">Check Now!</div>
-        <div className="common-heading">Our Feature Services</div>
-        <div className="grid grid-three-column">
-          {featuredProducts.map((curr) => {
-            return <Product key={curr.id} {...curr} />;
-          })}
-        </div>
+      <div className="container grid grid-three-column">
+        {products.map((cur, id) => {
+          return <Product key={cur.id} {...cur} />;
+        })}
       </div>
     </Wrapper>
   );
@@ -27,10 +18,13 @@ const FeaturedProduct = () => {
 
 const Wrapper = styled.section`
   padding: 9rem 0;
-  background-color: ${({ theme }) => theme.colors.bg};
 
   .container {
     max-width: 120rem;
+  }
+
+  .grid {
+    gap: 3.2rem;
   }
 
   figure {
@@ -64,26 +58,14 @@ const Wrapper = styled.section`
       height: 20rem;
       transition: all 0.2s linear;
     }
-
-    .caption {
-      position: absolute;
-      top: 15%;
-      right: 10%;
-      text-transform: uppercase;
-      background-color: ${({ theme }) => theme.colors.bg};
-      color: ${({ theme }) => theme.colors.helper};
-      padding: 0.8rem 2rem;
-      font-size: 1.2rem;
-      border-radius: 2rem;
-    }
   }
 
   .card {
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.colors.bg};
     border-radius: 1rem;
 
     .card-data {
-      padding: 0 2rem;
+      padding: 0 1rem;
     }
 
     .card-data-flex {
@@ -93,13 +75,13 @@ const Wrapper = styled.section`
       align-items: center;
     }
 
+    .card-data--price {
+      color: ${({ theme }) => theme.colors.helper};
+    }
+
     h3 {
       color: ${({ theme }) => theme.colors.text};
       text-transform: capitalize;
-    }
-
-    .card-data--price {
-      color: ${({ theme }) => theme.colors.helper};
     }
 
     .btn {
@@ -125,4 +107,4 @@ const Wrapper = styled.section`
   }
 `;
 
-export default FeaturedProduct;
+export default GridView;

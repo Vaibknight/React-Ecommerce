@@ -13,7 +13,7 @@ import { MdSecurity } from "react-icons/md";
 import Star from "./component/Star";
 import AddToCart from "./component/AddToCart";
 
-const API = "https://api.pujakaitem.com/api/products";
+const API = "https://fakestoreapi.com/products";
 
 const SingleProduct = () => {
   const { getSingleProduct, isSingleLoading, singleProduct } =
@@ -21,32 +21,26 @@ const SingleProduct = () => {
 
   const { id } = useParams();
 
-  const {
-    id: alias,
-    name,
-    company,
-    price,
-    description,
-    category,
-    stock,
-    stars,
-    reviews,
-    image,
-  } = singleProduct;
+  const { id: alias, title, image, rating, price, description } = singleProduct;
+
+  // const ratings = rating.rate;
+  // const counts = rating.count;
+  // console.log(counts);
 
   useEffect(() => {
-    getSingleProduct(`${API}?id=${id}`);
+    getSingleProduct(`${API}/${id}`);
   }, []);
-
-  console.log(image);
 
   if (isSingleLoading) {
     return <div className="page_Loading">Loading .....</div>;
   }
 
+  console.log(title);
+  console.log(image);
+
   return (
     <Wrapper>
-      <PageNavigation title={name} />
+      <PageNavigation title={title} />
       <Container className="container">
         <div className="grid grid-two-column">
           <div className="product_images">
@@ -54,9 +48,8 @@ const SingleProduct = () => {
           </div>
 
           <div className="product-data">
-            <h2>{name}</h2>
-            <Star stars={stars} reviews={reviews} />
-            <p>{reviews}</p>
+            <h2>{title}</h2>
+            {/* <Star rating={rating} /> */}
             <div className="product-data-price">
               MRP:
               <del>
@@ -90,20 +83,18 @@ const SingleProduct = () => {
                   <p>2 Year Warranty</p>
                 </div>
               </div>
-              <div className="product-data-info" style={{ margin: "20px 0px" }}>
+              {/* <div className="product-data-info" style={{ margin: "20px 0px" }}>
                 <p>
                   Available:{" "}
-                  <span>{stock > 0 ? "In Stock" : "Not Available"}</span>
+                  <span>{ratings > 0 ? "In Stock" : "Not Available"}</span>
                 </p>
                 <p>
                   ID: <span>{id}</span>
                 </p>
-                <p>
-                  Brand: <span>{company}</span>
-                </p>
-              </div>
-              <hr style={{ margin: "20px 0px" }} />
-              {stock > 0 && <AddToCart product={singleProduct} />}
+              </div> */}
+              {/* <hr style={{ margin: "20px 0px" }} />
+              {counts > 0 && <AddToCart product={singleProduct} />} */}
+              {<AddToCart product={singleProduct} />}
             </div>
           </div>
         </div>

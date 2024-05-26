@@ -6,7 +6,7 @@ import { type } from "@testing-library/user-event/dist/type";
 
 const AppContext = createContext();
 
-const API = "https://api.pujakaitem.com/api/products";
+const API = "https://fakestoreapi.com/products";
 
 const AppProvider = ({ children }) => {
   const initialState = {
@@ -25,6 +25,7 @@ const AppProvider = ({ children }) => {
     try {
       const res = await axios.get(url);
       const products = await res.data;
+
       dispatch({ type: "SET_API_DATA", payload: products });
     } catch (error) {
       dispatch({ type: "API_ERROR" });
