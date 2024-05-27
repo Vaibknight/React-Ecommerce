@@ -69,6 +69,36 @@ const filterReducer = (state, action) => {
       filter_products: newSortData,
     };
   }
+
+  if (action.type == "UPDATE_FILTERS_VALUE") {
+    const { name, value } = action.payload;
+
+    return {
+      ...state,
+      filters: {
+        ...state.filters,
+        [name]: value,
+      },
+    };
+  }
+
+  if (action.type == "FILTER_PRODUCTS") {
+    let { all_products } = state;
+    let tempFilterProduct = [...all_products];
+
+    const { text } = state.filters;
+
+    if (text) {
+      tempFilterProduct = tempFilterProduct.filter((curr) => {
+        return curr.title.toLowerCase().includes(text);
+      });
+    }
+
+    return {
+      ...state,
+      filter_products: tempFilterProduct,
+    };
+  }
 };
 
 export default filterReducer;
