@@ -14,7 +14,7 @@ const Product = (curr) => {
 
         <div className="card-data">
           <div className="card-data-flex">
-            <h3>{title.slice(0, 20)}...</h3>
+            <h3>{title}</h3>
             <p className="card-data--price">
               <FormatPrice price={price} />
             </p>

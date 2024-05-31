@@ -1,12 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 import { useFilterContext } from "../context/filterContext";
+import FormatPrice from "../Helpers/FormatPrice";
 
 const FilterSection = () => {
   const {
-    filters: { text },
+    filters: { text, price, maxPrice, minPrice },
+    all_products,
     updateFilterValue,
   } = useFilterContext();
+
+  // To get the unique data of each fields
+  const getUniqueData = (data, property) => {
+    let newVal = data.map((cur) => {
+      return cur[property];
+    });
+    return (newVal = ["All", ...new Set(newVal)]);
+  };
+
+  // WE NEED UINQUE DATA
+
+  const categoryOnlyData = getUniqueData(all_products, "category");
 
   return (
     <Wrapper>
@@ -17,8 +31,43 @@ const FilterSection = () => {
             name="text"
             value={text}
             onChange={updateFilterValue}
+            placeholder="SEARCH"
           />
         </form>
+      </div>
+
+      <div className="filter-category">
+        <h3>Category</h3>
+        <div>
+          {categoryOnlyData.map((cur, index) => {
+            return (
+              <button
+                type="button"
+                name="category"
+                value={cur}
+                key={index}
+                onClick={updateFilterValue}
+              >
+                {cur}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="filter_price">
+        <h3>Price</h3>
+        <p>
+          <FormatPrice price={price} />
+        </p>
+        <input
+          type="range"
+          name="price"
+          min={minPrice}
+          max={maxPrice}
+          value={price}
+          onChange={updateFilterValue}
+        />
       </div>
     </Wrapper>
   );
