@@ -4,33 +4,31 @@ import { AiOutlineStar } from "react-icons/ai";
 import React from "react";
 import styled from "styled-components";
 
-const Star = ({ rating }) => {
-  const ratingStar = Array.from({ length: 5 }, (ele, index) => {
+const Star = ({ stars, reviews }) => {
+  console.log(stars);
+  const ratingStar = Array.from({ length: 5 }, (elem, index) => {
     let number = index + 0.5;
-
-    // const { rate, count } = rating;
-
-    // console.log(rate);
-
-    // return (
-    //   <span key={index}>
-    //     {rating >= index + 1 ? (
-    //       <FaStar className="icon" />
-    //     ) : rating > number ? (
-    //       <FaStarHalfAlt className="icon" />
-    //     ) : (
-    //       <AiOutlineStar className="icon" />
-    //     )}
-    //   </span>
-    // );
+    // debugger;
+    return (
+      <span key={index}>
+        {stars >= index + 1 ? (
+          <FaStar className="icon" />
+        ) : stars >= number ? (
+          <FaStarHalfAlt className="icon" />
+        ) : (
+          <AiOutlineStar className="icon" />
+        )}
+      </span>
+    );
   });
 
   return (
-    <>
-      <Wrapper>
-        <div className="icon-style">{ratingStar}</div>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <div className="icon-style">
+        {ratingStar}
+        <p>({reviews} customer reviews)</p>
+      </div>
+    </Wrapper>
   );
 };
 

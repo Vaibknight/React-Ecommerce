@@ -1,20 +1,15 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
+const MyImage = ({ imgs = [{ url: "" }] }) => {
+  const [mainImage, setMainImage] = useState(imgs[0]);
 
-const MyImage = ({ image = [{ url: "" }] }) => {
-  const [arrID, setArrID] = useState(image[0].url);
-
-  console.log(image);
-
-  const getID = (url) => {
-    setArrID(url);
-  };
+  console.log(imgs);
 
   return (
     <Wrapper>
-      {/* <div className="grid grid-four-column">
-        {image.map((ele, index) => {
+      <div className="grid grid-four-column">
+        {imgs.map((ele, index) => {
           return (
             <figure>
               <img
@@ -22,15 +17,15 @@ const MyImage = ({ image = [{ url: "" }] }) => {
                 alt={ele.filename}
                 className="box-image--style"
                 key={index}
-                onClick={() => getID(ele.url)}
+                onClick={() => setMainImage(ele)}
               />
             </figure>
           );
         })}
-      </div> */}
+      </div>
 
       <div className="main-screen">
-        <img src={image} alt={image[0].filename} />
+        <img src={mainImage.url} alt={mainImage.filename} />
       </div>
     </Wrapper>
   );

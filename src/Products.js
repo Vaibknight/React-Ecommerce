@@ -8,6 +8,7 @@ import { Button } from "./styles/Button";
 
 const Products = () => {
   const { filter_products, grid_view } = useFilterContext();
+  console.log(filter_products);
 
   return (
     <Wrapper>

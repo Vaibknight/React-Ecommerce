@@ -6,7 +6,7 @@ import { type } from "@testing-library/user-event/dist/type";
 
 const AppContext = createContext();
 
-const API = "https://fakestoreapi.com/products";
+const API = "https://api.pujakaitem.com/api/products";
 
 const AppProvider = ({ children }) => {
   const initialState = {

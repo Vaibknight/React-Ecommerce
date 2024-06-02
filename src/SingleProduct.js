@@ -13,7 +13,7 @@ import { MdSecurity } from "react-icons/md";
 import Star from "./component/Star";
 import AddToCart from "./component/AddToCart";
 
-const API = "https://fakestoreapi.com/products";
+const API = "https://api.pujakaitem.com/api/products";
 
 const SingleProduct = () => {
   const { getSingleProduct, isSingleLoading, singleProduct } =
@@ -21,7 +21,18 @@ const SingleProduct = () => {
 
   const { id } = useParams();
 
-  const { id: alias, title, image, rating, price, description } = singleProduct;
+  const {
+    id: alias,
+    name,
+    company,
+    price,
+    description,
+    category,
+    stock,
+    stars,
+    reviews,
+    image,
+  } = singleProduct;
 
   // const ratings = rating.rate;
   // const counts = rating.count;
@@ -35,67 +46,67 @@ const SingleProduct = () => {
     return <div className="page_Loading">Loading .....</div>;
   }
 
-  console.log(title);
-  console.log(image);
-
   return (
     <Wrapper>
-      <PageNavigation title={title} />
+      <PageNavigation title={name} />
       <Container className="container">
         <div className="grid grid-two-column">
+          {/* product Images  */}
           <div className="product_images">
-            <MyImage image={image} />
+            <MyImage imgs={image} />
           </div>
 
+          {/* product dAta  */}
           <div className="product-data">
-            <h2>{title}</h2>
-            {/* <Star rating={rating} /> */}
-            <div className="product-data-price">
+            <h2>{name}</h2>
+            <Star stars={stars} reviews={reviews} />
+
+            <p className="product-data-price">
               MRP:
               <del>
                 <FormatPrice price={price + 250000} />
               </del>
-              <p className="product-data-price product-data-real-price">
-                Deal of the Day: <FormatPrice price={price} />
-              </p>
-              <p>{description}</p>
-              <div
-                className="product-data-warranty"
-                style={{ margin: "20px 0px" }}
-              >
-                <div className="product-warranty-data">
-                  <TbTruckDelivery className="warranty-icon" />
-                  <p>Free Delivery</p>
-                </div>
-
-                <div className="product-warranty-data">
-                  <TbReplace className="warranty-icon" />
-                  <p>30 Days Replacement</p>
-                </div>
-
-                <div className="product-warranty-data">
-                  <TbTruckDelivery className="warranty-icon" />
-                  <p>Vaibhav Delivery</p>
-                </div>
-
-                <div className="product-warranty-data">
-                  <MdSecurity className="warranty-icon" />
-                  <p>2 Year Warranty</p>
-                </div>
+            </p>
+            <p className="product-data-price product-data-real-price">
+              Deal of the Day: <FormatPrice price={price} />
+            </p>
+            <p>{description}</p>
+            <div className="product-data-warranty">
+              <div className="product-warranty-data">
+                <TbTruckDelivery className="warranty-icon" />
+                <p>Free Delivery</p>
               </div>
-              {/* <div className="product-data-info" style={{ margin: "20px 0px" }}>
-                <p>
-                  Available:{" "}
-                  <span>{ratings > 0 ? "In Stock" : "Not Available"}</span>
-                </p>
-                <p>
-                  ID: <span>{id}</span>
-                </p>
-              </div> */}
-              {/* <hr style={{ margin: "20px 0px" }} />
-              {counts > 0 && <AddToCart product={singleProduct} />} */}
-              {<AddToCart product={singleProduct} />}
+
+              <div className="product-warranty-data">
+                <TbReplace className="warranty-icon" />
+                <p>30 Days Replacement</p>
+              </div>
+
+              <div className="product-warranty-data">
+                <TbTruckDelivery className="warranty-icon" />
+                <p>Thapa Delivered </p>
+              </div>
+
+              <div className="product-warranty-data">
+                <MdSecurity className="warranty-icon" />
+                <p>2 Year Warranty </p>
+              </div>
             </div>
+
+            <div className="product-data-info">
+              <p>
+                Available:
+                <span> {stock > 0 ? "In Stock" : "Not Available"}</span>
+              </p>
+              <p>
+                ID : <span> {id} </span>
+              </p>
+              <p>
+                Brand :<span> {company} </span>
+              </p>
+            </div>
+            <hr />
+            {stock > 0 && <AddToCart product={singleProduct} />}
           </div>
         </div>
       </Container>
